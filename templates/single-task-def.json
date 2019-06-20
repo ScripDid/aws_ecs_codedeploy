@@ -1,0 +1,33 @@
+[
+  {    
+    "environment":[      
+          { "name": "REGION", "value":"${REGION}"},
+          { "name": "APPLICATION", "value": "${APPLICATION}" }
+        ],
+    "name": "${TASK_NAME}",
+    "image": "${IMAGE_TAG}",
+    "cpu": ${CONTAINER_CPU},
+    "memoryReservation": ${CONTAINER_MEMORY_RESERVATION},
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": ${CONTAINER_PORT},
+        "hostPort": ${HOST_PORT}
+      }, 
+      {
+        "containerPort": 122,
+        "hostPort": 0
+      }      
+    ],
+    "logConfiguration":
+    {
+        "logDriver": "awslogs",
+        "options":
+        {
+           "awslogs-group": "${CLOUDWATCH_LOG_GROUP_DOCKER}",
+           "awslogs-region": "${REGION}",
+           "awslogs-stream-prefix": "${CLOUDWATCH_STREAM_PREFIX}"
+        }
+    }
+  }
+]

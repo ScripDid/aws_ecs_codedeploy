@@ -1,0 +1,27 @@
+Content-Type: multipart/mixed; boundary="==BOUNDARY=="
+MIME-Version: 1.0
+
+--==BOUNDARY==
+MIME-Version: 1.0
+Content-Type: text/cloud-boothook; charset="us-ascii"
+#!/bin/bash
+
+echo "Hello :D" >> /var/log/order.log
+
+--==BOUNDARY==
+MIME-Version: 1.0
+Content-Type: text/cloud-config; charset="us-ascii"
+
+#cloud-config
+cloud_final_modules:
+- [users-groups,always]
+users:
+  - default
+  - name: didier
+    groups: [ wheel ]
+    sudo: [ "ALL=(ALL) NOPASSWD:ALL" ]
+    shell: /bin/bash
+    ssh-authorized-keys: 
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8Ja5vUwwm2aKJwcoDh47PPNAZLM5Gx6PxJ+Qy0/Qtedw9xBUkYfj25T4YC3HOpUhe+aCgFu3AD9sGwJM4p9vt2poQgCIihGXZmTbztxlup9eB4grm6kU46lk4VQRtqdIwLGP3oV8puqkUytVrmGdSDZ1gVNF6odzqX3LT1Li1ccFFla1F+j4ZRqkw8IiEwygJDId+necJ+cn8Xq+VygzDkPKD900Bs/2g74lFRNVFI0y1izh1vf9eHGLZyz6jTvKow+XSW1nbLWbG5HRlxZG4waCW8owbiZE9pmN1xQZYkjr1LmY/RAstvfYbq/WfRps8RhgLzmsuA/098Tcgm7mr
+
+--==BOUNDARY==
